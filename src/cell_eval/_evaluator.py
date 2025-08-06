@@ -7,7 +7,7 @@ import anndata as ad
 import pandas as pd
 import polars as pl
 import scanpy as sc
-from pdex import parallel_differential_expression
+from pdex import parallel_differential_expression_vec
 
 from cell_eval.utils import guess_is_lognorm
 
@@ -293,7 +293,11 @@ def _load_or_build_de(
             batch_size=batch_size,
             pdex_kwargs=pdex_kwargs or {},
         )
-        frame = parallel_differential_expression(
+        # remove num_workers from pdex_kwargs if it exists
+        pdex_kwargs.pop("num_workers", None)
+        pdex_kwargs.pop("batch_size", None)
+
+        frame = parallel_differential_expression_vec(
             adata=anndata_pair.real if mode == "real" else anndata_pair.pred,
             **pdex_kwargs,
         )

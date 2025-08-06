@@ -32,3 +32,6 @@ cell-eval = "cell_eval.__main__:main"
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
+
+[tool.uv.sources]
+pdex = { git = "https://github.com/drbh/pdex.git" }
