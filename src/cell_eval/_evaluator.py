@@ -294,7 +294,6 @@ def _load_or_build_de(
             pdex_kwargs=pdex_kwargs or {},
         )
         # remove num_workers from pdex_kwargs if it exists
-        pdex_kwargs.pop("num_workers", None)
         pdex_kwargs.pop("batch_size", None)
 
         frame = parallel_differential_expression_vec(
